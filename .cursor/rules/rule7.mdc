@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [7]  UX flow (three screens)
+• **Main Screen**: semicircle gauge + tap‑for‑reasoning + top‑3 emotions gauges.  
+• **Detailed Screen**: full 27‑emotion horizontal bar chart (+ categories buckets).  
+• **Recommendations Screen**: list 3 Sonar links with 1‑line emotional‑balance blurb.  
+  Cursor: when autocompleting UI code suggest React component <RecommendationsList …/>.

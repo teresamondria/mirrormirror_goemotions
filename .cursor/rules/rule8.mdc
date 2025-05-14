@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# [8]  File‑generation rules for Cursor
+• When user asks to “add balanced recs component”, create `ui/Recommendations.tsx`.  
+• When a new OpenAI prompt tweak is needed, edit **only** `utils/promptTemplates.ts`.  
+• For colour edits, modify `globals.css` or Tailwind config, not inline classes.  
+• Never touch `dist/` or `public/icons/*` with AI code actions.

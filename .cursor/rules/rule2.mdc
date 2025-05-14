@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [2]  Allowed languages & tooling
+• **TypeScript** for all runtime logic (`src/**/*`); no JavaScript files in `src/`.
+• **Tailwind CSS** (already configured) for styles in `ui/popup.css`.
+• **D3.js** for the semicircle gauge and **Chart.js** for horizontal bar charts.
+• No Python / Node servers in this repo; all heavy ML occurs via external APIs.
+• Build pipeline = **Vite**; background code is an ES‑module service worker.

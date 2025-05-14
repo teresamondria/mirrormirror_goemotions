@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Tone-Scope",
+    "description": "Respect↔Contempt sentiment gauge + balanced recs for YouTube & news.",
+    "version": "1.0.0",
+    "action": { "default_popup": "ui/popup.html", "default_title": "Tone-Scope" },
+    "background": { "service_worker": "background/serviceWorker.js", "type": "module" },
+    "icons": {
+      "128": "icons/logo-128.png",
+      "48":  "icons/logo-48.png",
+      "16":  "icons/logo-16.png"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": [
+      "https://*.youtube.com/*",
+      "https://*/*",                         
+      "https://api.openai.com/*",
+      "https://api.perplexity.ai/*",
+      "https://video.google.com/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["https://*.youtube.com/*", "https://*/*"],
+        "js": ["content/contentScript.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "web_accessible_resources": [{
+      "resources": ["icons/*.png"],
+      "matches": ["<all_urls>"]
+    }]
+  }
+  

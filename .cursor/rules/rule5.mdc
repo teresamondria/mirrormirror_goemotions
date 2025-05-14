@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [5]  API constraints
+• OpenAI calls: model `"gpt-4o-mini"`, `temperature:0.2`; parse JSON safely.  
+• Sonar calls: model `"sonar-pro"`; prompt requests 3 links “TITLE | URL | summary”.  
+• YouTube captions: use `captions.list` then the timed‑text download URL; fallback to auto captions.

@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [6]  UI & accessibility
+• **Colour palette**  
+  – Respect green `#4a8c3c`, Neutral amber `#f0b840`, Contempt crimson `#d04545`.  
+  – Brand purple `#6a3a8c` used **only** for header bars, borders, CTA buttons.  
+• **No gradients** in analytic graphics; arcs are solid strokes.  
+• Gauge lives on a white card; ensure 4.5:1 contrast on all text.  
+• Bar chart must be horizontal (prevent time‑series mis‑reading).  
+• Every screen (Gauge / Detailed‑Analysis / Recommendations) has an Info button.

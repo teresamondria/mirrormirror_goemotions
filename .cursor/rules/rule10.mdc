@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# [10]  Prohibited
+• Don’t fetch external packages at runtime (all libs bundled).  
+• No brand purple (#6a3a8c) in gauge arcs or sentiment bars.  
+• No direct DOM manipulation inside React‑based popup; use state hooks.

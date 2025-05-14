@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [1]  Repository context
+• You are generating code for a Manifest V3 Chrome extension named **Tone‑Scope**.
+• It analyses YouTube transcripts & articles, classifies emotions with GPT‑4o‑mini,  
+  and fetches balanced recommendations from the Perplexity Sonar API.

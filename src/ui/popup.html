@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body class="bg-purple text-white w-96 p-4">
+  <h1 class="text-xl font-semibold mb-3">Tone‑Scope</h1>
+
+  <div id="gaugeContainer" class="mb-4"></div>
+  <p id="rationale" class="italic text-sm mb-4"></p>
+
+  <button id="toggleBreakdown" class="underline mb-2">Show breakdown</button>
+  <div id="chartContainer" class="hidden mb-4"></div>
+
+  <h2 class="font-semibold mb-2">Balanced alternatives</h2>
+  <ul id="recs" class="space-y-2 text-sm"></ul>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

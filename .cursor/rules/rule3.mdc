@@ -1,0 +1,13 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# [3]  Project folder reference  (mirror when autocompleting imports)
+src/
+ ├─ background/       → serviceWorker.ts, openaiClient.ts, sonarClient.ts, …  
+ ├─ content/          → contentScript.ts  
+ ├─ ui/               → popup.html, popup.ts, gauge.ts, charts.ts  
+ ├─ utils/            → promptTemplates.ts, emotionMap.ts  
+ └─ types/            → gptTypes.d.ts

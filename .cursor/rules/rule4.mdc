@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [4]  Coding style
+• Prettier defaults (2‑space indent, single quotes, trailing commas).  
+• Prefer explicit types; all `any` must be commented with a TODO.  
+• Use async / await; never `.then().catch()` chains in new code.  
+• File‑header comment: filename + 1‑line purpose.  
+• Exports: named exports unless a file exposes a single React/Vue component.

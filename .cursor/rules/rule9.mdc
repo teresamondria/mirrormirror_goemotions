@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# [9]  Commit etiquette
+• Granular commits: one logical change per commit (e.g. “feat: add Sonar client”).  
+• Commit message format: `type(scope): summary` (Conventional Commits).  
+• Run `npm run lint && npm run build` before finishing an AI‑driven refactor.
