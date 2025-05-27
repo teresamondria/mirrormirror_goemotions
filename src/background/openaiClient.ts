@@ -1,15 +1,9 @@
 // src/background/openaiClient.ts
+// Uses Vite import.meta.env for API keys
 //-----------------------------------------------------
 // Returns EmotionResult with 27 scores 0-1 + framing.
 //-----------------------------------------------------
 import { EmotionResult } from '../types/gptTypes';
-
-import dotenv from 'dotenv';
-
-console.log('Current working directory:', process.cwd());
-console.log('Looking for .env in:', process.cwd());
-dotenv.config();
-console.log('Actual OPENAI_API_KEY_NEW:', process.env.OPENAI_API_KEY_NEW);
 
 // Define emotion categories
 const POSITIVE_EMOTIONS = [
@@ -58,8 +52,8 @@ function getFramingLabel(score: number): string {
 }
 
 export async function analyzeWithOpenAI(text: string): Promise<EmotionResult> {
-  const apiKey = process.env.OPENAI_API_KEY_NEW;
-  if (!apiKey) throw new Error('OPENAI_API_KEY_NEW missing');
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY_NEW;
+  if (!apiKey) throw new Error('VITE_OPENAI_API_KEY_NEW missing');
 
   /* --- STRICT JSON-ONLY PROMPT --------------------- */
   const systemPrompt = `
@@ -111,26 +105,19 @@ Here is the text:
     throw new Error(`OpenAI error: ${err.error?.message || resp.statusText}`);
   }
 
-  const raw = (await resp.json()).choices[0].message.content;
-
-  try {
-    const parsed = JSON.parse(raw);
-    const framingScore = calculateFramingScore(parsed.emotion_scores);
-    
-    return {
-      ...parsed,
-      framing: getFramingLabel(framingScore),
-      framing_score: framingScore
-    } as EmotionResult;
-  } catch (e) {
-    console.error('OpenAI output was not valid JSON:', raw);
-    throw new Error('Invalid JSON from OpenAI');
-  }
+  const result = await resp.json();
+  const framingScore = calculateFramingScore(result.emotion_scores);
+  
+  return {
+    ...result,
+    framing: getFramingLabel(framingScore),
+    framing_score: framingScore
+  } as EmotionResult;
 }
 
 export async function summarizeTranscript(transcript: string): Promise<string> {
-  const apiKey = process.env.OPENAI_API_KEY_NEW;
-  if (!apiKey) throw new Error('OPENAI_API_KEY_NEW missing');
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY_NEW;
+  if (!apiKey) throw new Error('VITE_OPENAI_API_KEY_NEW missing');
 
   const systemPrompt = `You are a helpful assistant. Summarize the following transcript in 1-2 sentences (max 50 words).`;
   const userPrompt = `Transcript:\n"""${transcript.slice(0, 3000)}"""`;

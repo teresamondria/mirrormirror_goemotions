@@ -1,7 +1,5 @@
+// Uses Vite import.meta.env for API keys
 import { TranscriptCache } from './types';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 let transcriptCache: TranscriptCache = {};
 
@@ -10,7 +8,7 @@ let transcriptCache: TranscriptCache = {};
  */
 export async function generateTranscript(videoId: string): Promise<string> {
   try {
-    const apiKey = process.env.OPENAI_API_KEY_NEW;
+    const apiKey = import.meta.env.VITE_OPENAI_API_KEY_NEW;
     if (!apiKey) throw new Error('OPENAI_API_KEY_NEW missing');
 
     // Use OpenAI to generate a transcript from the video

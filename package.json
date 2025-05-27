@@ -7,13 +7,17 @@
     "dev": "vite --mode dev",
     "build": "vite build",
     "lint": "eslint src --ext .ts,.tsx",
-    "test": "jest"
+    "test": "jest",
+    "postbuild": "cp src/manifest.json dist/manifest.json && mkdir -p dist/ui && cp src/ui/popup.html dist/ui/popup.html && mkdir -p dist/icons && cp src/icons/logo-*.png dist/icons/"
   },
   "dependencies": {
-    "chart.js": "^4.4.0",
+    "chart.js": "^4.4.9",
     "d3": "^7.9.0",
     "dotenv": "^16.5.0",
     "idb": "^7.1.1",
+    "react": "^19.1.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.0",
     "youtube-transcript": "^1.2.1"
   },
   "devDependencies": {
@@ -21,6 +25,8 @@
     "@types/d3": "^7.4.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.15.17",
+    "@types/react": "^19.1.5",
+    "@types/react-dom": "^19.1.5",
     "jest": "^29.7.0",
     "tailwindcss": "^3.4.0",
     "ts-jest": "^29.1.2",
