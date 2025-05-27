@@ -18,7 +18,7 @@ export const getFramingColor = (framing: Framing): string => {
 
 export const getEmotionCategory = (emotion: string): keyof typeof EMOTION_CATEGORIES => {
   for (const [category, emotions] of Object.entries(EMOTION_CATEGORIES)) {
-    if (emotions.includes(emotion)) {
+    if ((emotions as readonly string[]).includes(emotion)) {
       return category as keyof typeof EMOTION_CATEGORIES;
     }
   }

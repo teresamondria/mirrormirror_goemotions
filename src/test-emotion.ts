@@ -1,8 +1,15 @@
 import 'dotenv/config';
-import { analyzeWithOpenAI } from './background/openaiClient';
+import { analyzeWithOpenAI } from './background/openaiClient.js';
 
 async function main() {
   try {
+    // Check if API key is loaded
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error('OPENAI_API_KEY not found in environment variables');
+    }
+    console.log('API key loaded:', apiKey ? 'Yes' : 'No');
+
     // Test text with clear emotional content
     const testText = `I am absolutely furious about this situation! The way they've handled it is completely unacceptable. 
     I can't believe they would treat people this way. This is outrageous and I demand an immediate explanation.`;
@@ -27,7 +34,8 @@ async function main() {
     console.log('\nExplanation:', result.explanation);
     
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error:', error instanceof Error ? error.message : error);
+    process.exit(1);
   }
 }
 

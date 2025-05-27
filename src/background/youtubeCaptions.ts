@@ -16,32 +16,35 @@ function extractVideoId(url: string): string | null {
   for (const pattern of patterns) {
     const match = url.match(pattern);
     if (match && match[1]) {
+      console.log('[extractVideoId] Matched video ID:', match[1]);
       return match[1];
     }
   }
+  console.log('[extractVideoId] No video ID found in URL:', url);
   return null;
 }
 
 /**
  * Fetches transcript using youtube-transcript package
  */
-async function fetchTranscriptTimedText(videoId: string, lang = 'en'): Promise<string | null> {
+export async function fetchTranscriptTimedText(videoId: string, lang = 'en'): Promise<string | null> {
   try {
-    console.log('Fetching transcript...');
-    
+    console.log('[fetchTranscriptTimedText] Fetching transcript for video:', videoId, 'lang:', lang);
     // Try to fetch transcript with the requested language
     try {
       const transcript = await YoutubeTranscript.fetchTranscript(videoId, { lang });
       if (transcript && transcript.length > 0) {
-        console.log('Successfully fetched transcript');
+        console.log('[fetchTranscriptTimedText] Successfully fetched transcript, segments:', transcript.length);
         return transcript
           .map((segment: { text: string }) => segment.text)
           .join(' ')
           .replace(/\s+/g, ' ')
           .trim();
+      } else {
+        console.log('[fetchTranscriptTimedText] No transcript segments found for lang:', lang);
       }
     } catch (error) {
-      console.log(`No transcript found for language ${lang}, trying English...`);
+      console.log(`[fetchTranscriptTimedText] No transcript found for language ${lang}, error:`, error);
     }
 
     // If the requested language failed, try English
@@ -49,22 +52,24 @@ async function fetchTranscriptTimedText(videoId: string, lang = 'en'): Promise<s
       try {
         const transcript = await YoutubeTranscript.fetchTranscript(videoId, { lang: 'en' });
         if (transcript && transcript.length > 0) {
-          console.log('Successfully fetched English transcript');
+          console.log('[fetchTranscriptTimedText] Successfully fetched English transcript, segments:', transcript.length);
           return transcript
             .map((segment: { text: string }) => segment.text)
             .join(' ')
             .replace(/\s+/g, ' ')
             .trim();
+        } else {
+          console.log('[fetchTranscriptTimedText] No English transcript segments found.');
         }
       } catch (error) {
-        console.log('No English transcript found');
+        console.log('[fetchTranscriptTimedText] No English transcript found, error:', error);
       }
     }
 
-    console.log('No transcripts available');
+    console.log('[fetchTranscriptTimedText] No transcripts available for video:', videoId);
     return null;
   } catch (error) {
-    console.error('Error fetching transcript:', error);
+    console.error('[fetchTranscriptTimedText] Error fetching transcript:', error);
     return null;
   }
 }
@@ -75,6 +80,7 @@ async function fetchTranscriptTimedText(videoId: string, lang = 'en'): Promise<s
 export async function fetchTranscript(videoId: string): Promise<string | null> {
   // Check cache first
   if (transcriptCache[videoId] && Date.now() - transcriptCache[videoId].timestamp < 30 * 24 * 60 * 60 * 1000) {
+    console.log('[fetchTranscript] Returning transcript from cache for video:', videoId);
     return transcriptCache[videoId].transcript;
   }
 
@@ -86,10 +92,13 @@ export async function fetchTranscript(videoId: string): Promise<string | null> {
         transcript,
         timestamp: Date.now()
       };
+      console.log('[fetchTranscript] Transcript cached for video:', videoId);
+    } else {
+      console.log('[fetchTranscript] No transcript fetched for video:', videoId);
     }
     return transcript;
   } catch (error) {
-    console.error('Error fetching transcript:', error);
+    console.error('[fetchTranscript] Error fetching transcript:', error);
     return null;
   }
 }
@@ -102,6 +111,5 @@ export async function getTranscriptFromUrl(url: string): Promise<string | null> 
   if (!videoId) {
     throw new Error('Invalid YouTube URL');
   }
-
   return fetchTranscript(videoId);
 }
